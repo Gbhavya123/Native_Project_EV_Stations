@@ -5,9 +5,7 @@ export default function Header() {
   return (
     <View className="flex-row items-center justify-between px-5 py-3 bg-white">
       <Text className="text-3xl font-bold">
-        FLU
-        <Text className="text-3xl font-bold italic">X</Text>
-        <Text className="text-3xl font-bold">TON</Text>
+        EV_Station
       </Text>
 
       <View className="flex-row gap-3">

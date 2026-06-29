@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "ChargeIt",
-    "slug": "ChargeIt",
+    "name": "EV_Station",
+    "slug": "EV_Station",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "chargeit",
+    "scheme": "EV_Station",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
