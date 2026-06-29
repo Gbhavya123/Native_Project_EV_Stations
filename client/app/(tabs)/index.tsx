@@ -29,6 +29,7 @@ export default function App() {
         <CityDropdown selectedCity={selectedCity} onSelectCity={setSelectedCity} />
         <StatusChips stations={filteredStations} />
       </View>
+      
       <ScrollView className='mt-5'>
         <StationList stations={filteredStations} />
       </ScrollView>

@@ -9,19 +9,18 @@ const app = express();
 app.use(cors());
 
 const server = createServer(app);
-
 const io = new Server(server, {
-  cors: { origin: '*' },
+  cors: { origin: '*' }, // allowing from all origins for testing purpose
 });
 
 const stations: station[] = JSON.parse(JSON.stringify(MOCK_STATIONS));
 
-const notifySubscribers = new Map<string, Set<string>>();
+const notifySubscribers = new Map<string, Set<string>>(); // this is for subscribers who want to be notified when a charger becomes free
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
 
-  socket.emit('stations:init', stations);
+  socket.emit('stations:allStations', stations);
 
   socket.on('charger:free', ({ stationId, chargerId }) => {
     const station = stations.find((s) => s.id === stationId);
@@ -29,6 +28,7 @@ io.on('connection', (socket) => {
 
     if (charger && charger.status === 'charging') {
       charger.status = 'available';
+
       io.emit('charger:statusChanged', {
         stationId,
         chargerId,
@@ -40,16 +40,13 @@ io.on('connection', (socket) => {
       const subscribers = notifySubscribers.get(key);
       if (subscribers && subscribers.size > 0) {
         const chargerLabel = charger.label ?? chargerId;
-        const stationName = station?.name ?? stationId;
+        const stationName = station?.name ?? stationId; 
+
         subscribers.forEach((subscriberSocketId) => {
-          io.to(subscriberSocketId).emit('charger:isFreeNow', {
-            stationId,
-            chargerId,
-            chargerLabel,
-            stationName,
-          });
+          io.to(subscriberSocketId).emit('charger:isFreeNow', { stationId, chargerId, chargerLabel, stationName, });
         });
-        // Clear them after notifying
+
+        // Clear them after notification is donee
         notifySubscribers.delete(key);
         console.log(`Notified ${subscribers.size} subscriber(s) that charger ${chargerId} is free`);
       }

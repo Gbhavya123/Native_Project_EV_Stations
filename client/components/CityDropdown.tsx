@@ -21,22 +21,12 @@ export default function CityDropdown({ selectedCity, onSelectCity }: Props) {
                 className="mx-5 mt-4 flex-row items-center justify-between rounded-xl border border-gray-300 bg-white px-4 py-4"
             >
                 <View className="flex-row items-center">
-                    <Ionicons
-                        name="location-outline"
-                        size={22}
-                        color="#2563EB"
-                    />
-
+                    <Ionicons name="location-outline" size={22} color="#2563EB" />
                     <Text className="ml-3 text-lg font-semibold text-gray-900">
                         {selectedCity}
                     </Text>
                 </View>
-
-                <Ionicons
-                    name="chevron-down-outline"
-                    size={20}
-                    color="#6B7280"
-                />
+                <Ionicons name="chevron-down-outline" size={20} color="#6B7280" />
             </TouchableOpacity>
 
             {/* Modal */}
@@ -45,15 +35,12 @@ export default function CityDropdown({ selectedCity, onSelectCity }: Props) {
                 visible={visible}
                 animationType="fade"
                 onRequestClose={() => setVisible(false)}
-
             >
                 <Pressable
                     className="flex-1 bg-black/30 mt-40 px-6"
                     onPress={() => setVisible(false)}
                 >
                     <View className="rounded-2xl bg-white overflow-hidden">
-
-
                         {cities.map((city) => (
                             <TouchableOpacity
                                 key={city}
@@ -69,7 +56,6 @@ export default function CityDropdown({ selectedCity, onSelectCity }: Props) {
                                         size={20}
                                         color="#2563EB"
                                     />
-
                                     <Text className="ml-3 text-lg">
                                         {city}
                                     </Text>

@@ -14,11 +14,7 @@ const STATUS_COLORS = {
 
 export default function StatusChips({ stations }: Props) {
   const stats = useMemo(() => {
-    const counts = { 
-      available: 0,
-      charging: 0,
-      offline: 0,
-    };
+    const counts = { available: 0,charging: 0,offline: 0 };
 
     stations.forEach(station =>
       station.chargers.forEach(charger => {
@@ -27,7 +23,6 @@ export default function StatusChips({ stations }: Props) {
         }
       })
     );
-
     return [
       { label: `${counts.available} available`, status: "available" as const },
       { label: `${counts.charging} charging`, status: "charging" as const },
