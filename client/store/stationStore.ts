@@ -26,5 +26,5 @@ export const useStationStore = create<StationStore>((set) => ({
             } 
           : s
       ),
-    })),
+    })), 
 }));

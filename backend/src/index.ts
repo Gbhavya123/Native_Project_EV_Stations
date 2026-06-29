@@ -16,7 +16,6 @@ const io = new Server(server, {
 
 const stations: station[] = JSON.parse(JSON.stringify(MOCK_STATIONS));
 
-// Map key: "stationId::chargerId"  =>  Set of socket IDs waiting for notification
 const notifySubscribers = new Map<string, Set<string>>();
 
 io.on('connection', (socket) => {
@@ -50,7 +49,7 @@ io.on('connection', (socket) => {
             stationName,
           });
         });
-        // Clear subscribers after notifying
+        // Clear them after notifying
         notifySubscribers.delete(key);
         console.log(`Notified ${subscribers.size} subscriber(s) that charger ${chargerId} is free`);
       }

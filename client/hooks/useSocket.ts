@@ -4,9 +4,9 @@ import { io } from 'socket.io-client';
 import { useStationStore } from '@/store/stationStore';
 import { station } from '@/types';
 
-const socket = io('https://backend-native-amxq.onrender.com');
+const socket = io('https://native-project-ev-stations.onrender.com');
 
-// http://10.184.54.91:4000
+// use your pc ip to see faster updates for now:  http://10.184.54.91:4000
 
 socket.off('stations:init');
 socket.off('charger:statusChanged');
@@ -17,7 +17,7 @@ socket.on('stations:init', (data: station[]) => {
   useStationStore.getState().setStations(data);
 });
 
-socket.on('charger:statusChanged', ({
+socket.on('charger:statusChanged', ({ 
   stationId,
   chargerId,
   status,
