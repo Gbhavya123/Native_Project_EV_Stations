@@ -9,18 +9,22 @@ interface Props {
 }
 
 export default function ChargerList({ stationId, chargers }: Props) {
-    const router = useRouter();
+  const router = useRouter();
   return (
     <FlatList
       data={chargers}
-      keyExtractor={(item) => item.id} 
+      keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
         <ChargerCard
-            stationId={stationId}
-            charger={item}
-            onPress={id => router.push(`/charger/${id}`)}
-         />
-      )}
+          stationId={stationId}
+          charger={item}
+          onPress={id => router.push({
+            pathname: "/charger/[id]",
+            params: { id },
+          })}
+        />
+      )
+      }
       contentContainerStyle={{
         paddingHorizontal: 16,
         paddingTop: 16,
